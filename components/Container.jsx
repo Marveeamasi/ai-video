@@ -70,14 +70,14 @@ const Container = () => {
     return (
         <div className='flex flex-col z-1 relative pb-40'>
             <div className='flex justify-center items-center relative pt-10 pb-[25px]'>
-                <span onClick={() => router.back()} className='absolute text-[#8C8C8C] font-[500] text-[12px] left-10 max-sm:top-5 cursor-pointer hover:text-white'>
+                <span onClick={() => router.back()} className='absolute text-[#8C8C8C] font-[500] text-[14px] left-10 max-sm:top-5 cursor-pointer hover:text-white'>
                     Back
                 </span>
                 <div className='flex flex-col items-center'>
                     <h1 className='text-[32px] font-[600]'>How it works</h1>
                     <p className='text-[#8C8C8C] text-[14px] font-[400]'>Understand how to build your clone</p>
                 </div>
-                <Link href={'/consent-video'} className='absolute text-[#CF36E9] font-[500] text-[12px] right-10 max-sm:top-5 cursor-pointer hover:text-white'>Skip this process</Link>
+                <Link href={'/consent-video'} className='absolute text-[#CF36E9] font-[500] text-[14px] right-10 max-sm:top-5 cursor-pointer hover:text-white'>Skip this process</Link>
             </div> 
 
             <div className='flex self-center justify-center items-center relative' id='items'>
@@ -125,7 +125,7 @@ const Container = () => {
             <motion.button
                 id='continue-btn'
                 onClick={handleNext}
-                className='font-[700] flex self-center justify-center cursor-pointer transform transition duration-500 ease-in-out hover:scale-105 hover:opacity-75 items-center text-[12px] bg-[#9413E6] w-[254px] h-[35px] rounded-[4px]'
+                className='font-[700] flex self-center justify-center cursor-pointer transform transition duration-500 ease-in-out hover:scale-105 hover:opacity-75 items-center text-[16px] bg-[#9413E6] w-[254px] h-[35px] rounded-[4px]'
                 whileHover={{ scale: 1.05, opacity: 0.85 }}
                 whileTap={{ scale: 0.95 }}
             >
