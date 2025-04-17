@@ -9,12 +9,12 @@ const TextScriptFirst = ({setIsLong, isLong, scriptText, setScriptText}) => {
                     Enter Text
                     </div>
                     <textarea value={scriptText}
-                    onChange={(e) => setScriptText(e.target.value)} className="min-h-[87px] w-full rounded-[4px] p-[5px] bg-[#261148] outline-none font-[400] text-[12px] placeholder:text-[#dbdbdb] placeholder:font-[400] resize-none" placeholder="Write a short to medium length sentence, Separated by lines breaks for new ideas  (They will become new Shots)"/>
+                    onChange={(e) => setScriptText(e.target.value)} className="min-h-[95px] w-full rounded-[4px] p-[5px] bg-[#261148] outline-none font-[400] text-[14px] placeholder:text-[#dbdbdb] placeholder:font-[400] resize-none" placeholder="Write a short to medium length sentence, Separated by lines breaks for new ideas  (They will become new Shots)"/>
                     <div className="flex items-center gap-3">
                     <Image src='/scissors.png' alt="text icon" width={24} height={24} className='w-[24px] h-[24px] text-[12.51px] font-[700]'/>
                     Script Splitting
                     </div>
-                    <p className="font-[300] text-[10px] text-[#8C8C8C] w-full">If you pick "Short", we'll cut down your script for a dynamic editing (3-5 seconds cuts). <br/>
+                    <p className="font-[300] text-[12px] text-[#8C8C8C] w-full">If you pick "Short", we'll cut down your script for a dynamic editing (3-5 seconds cuts). <br/>
                     If you pick "Long", we'll do 12-15 second segments with less cuts.</p>
                     <div className="w-[190px] h-[45px] rounded-[12px] bg-[#9413E6] p-1 flex items-center gap-2">
                     <div onClick={()=> setIsLong(false)} className={`${isLong ? 'transparent' : 'bg-[#140926]'} w-[90px] h-[36px] rounded-[8px] text-[12.51px] p-[10px] gap-[10px] flex items-center justify-center transition-all duration-300 ease-in-out cursor-pointer`}>
