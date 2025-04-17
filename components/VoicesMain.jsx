@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { avatarVoicesDb, elevenVoicesDb } from '@/dummyData'
 import UtilsCard from './UtilsCard'
+import { FaPlus } from "react-icons/fa";
 
 const VoicesMain = () => {
     const router = useRouter();
@@ -17,6 +18,7 @@ const VoicesMain = () => {
     const [elevenVoices, setElevenVoices] = useState([]);
     const [voiceUtils, setVoiceUtils] = useState({});
     const [voiceEdit, setVoiceEdit] = useState({});
+    const [audioName, setAudioName] = useState('');
 
     
     const handleCreateAvatar = () => {
@@ -93,7 +95,7 @@ const VoicesMain = () => {
                             <Image src={'/cloud-upload.png'} alt='tips' width={24} height={24} className=''/>
                             <h1 className='text-[20px]'>Upload your audio</h1>
                           </div>
-                          <input type="text" placeholder='Enter Audio name.' className='outline-none h-[50px] w-full p-3 bg-[#261148] placeholder:text-[#8C8C8C] text-[10px] font-[300] rounded-[8px]'/>
+                          <input type="text" onChange={(e)=> setAudioName(e.target.value)} value={audioName} placeholder='Enter Audio name.' className='outline-none h-[50px] w-full p-3 bg-[#261148] placeholder:text-[#8C8C8C] text-[10px] font-[300] rounded-[8px]'/>
                           
                           <label htmlFor='file' className='h-[169px] cursor-pointer rounded-[8px] w-full p-2 flex bg-[#261148] flex-col gap-3 justify-center items-center text-[12px] font-[500]'>
                           <Image src={'/cloud-upload.png'} alt='tips' width={20} height={15} className=''/>
@@ -102,7 +104,7 @@ const VoicesMain = () => {
                             <input onChange={(e) => setFile(e.target.files[0])} type="file" id="file" className='hidden'/>
                             <div className='flex gap-1'>
                              <div className='w-[25px] h-[25px]'> <input id='check' type="checkbox" className='w-[25px] h-[25px] border border-[#261148] accent-[#CF36E9]' /></div>
-                              <label htmlFor='check' className='text-[#8C8C8C] text-[10px] font-[500]'>
+                              <label htmlFor='check' className='text-[#8C8C8C] text-[12px] font-[500]'>
                               I confirm I have the rights to upload and clone these voice samples and will not use platform-generated content unlawfully.
                                I agree to abide by VideoDual Terms of Service and Privacy Policy
                               </label>
@@ -247,7 +249,7 @@ const VoicesMain = () => {
                      <div className='text-[24px] max-sm:text-center font-[500]'>Voices</div>
                     <div className='flex items-center max-sm:flex-col gap-5'>
                    <SearchBar/>
-                     <Link href={'/avatar'} className='cursor-pointer hover:animate-pulse w-[196px] rounded-[4px] bg-[#CF36E9] font-[500] h-[44px] flex gap-2 items-center text-[20px] justify-center z-2'><Image alt='add' src='/add-icon.png' width={24} height={24} className='w-[24px] h-[24]'/>Create Avatar</Link>
+                     <Link href={'/avatar'} className='cursor-pointer hover:animate-pulse w-[196px] rounded-[4px] bg-[#CF36E9] font-[500] h-[44px] flex gap-2 items-center text-[20px] justify-center z-2'><FaPlus/>Create Avatar</Link>
                     </div>
              </div>
              <div className='flex gap-1 items-center max-sm:self-center px-5'>My Avatar <div className='text-[13.43px] bg-[#341E58] w-[26px] h-[26px] rounded-[3.35px] flex justify-center items-center'>0</div></div>
@@ -269,7 +271,7 @@ const VoicesMain = () => {
             :
             <div className="flex gap-5 px-5 flex-col items-center justify-center p-20">
                 <div className="max-w-[309px] text-center text-[#D9D9D9]">Create my own voice to make my avatar sound just like me</div>
-              <div onClick={()=> setShowPrompt(true)} className='cursor-pointer z-2 hover:animate-pulse w-[196px] rounded-[4px] bg-[#CF36E9] font-[500] h-[44px] flex gap-2 items-center text-[20px] justify-center'><Image alt='add' src='/add-icon.png' width={24} height={24} className='w-[24px] h-[24]'/>Create Voices</div>
+              <div onClick={()=> setShowPrompt(true)} className='cursor-pointer z-2 hover:animate-pulse w-[196px] rounded-[4px] bg-[#CF36E9] font-[500] h-[44px] flex gap-2 items-center text-[20px] justify-center'><FaPlus/>Create Voices</div>
             </div>}
             <div className='flex gap-1 items-center max-sm:self-center px-5'>Eleven Labs <div className='text-[13.43px] bg-[#341E58] w-[26px] h-[26px] rounded-[3.35px] flex justify-center items-center'>43</div></div>
             {elevenVoices?.length>0 ? 
