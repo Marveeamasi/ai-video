@@ -25,10 +25,10 @@ export default function CreateNewAvatarPrompt({ toggleCreate, filteredAvatars })
             type="text"
             id="name"
             placeholder="Enter Avatar name"
-            className="border-[#8C8C8C80] border rounded-[4px] text-[12px] py-[10px] px-[12px]"
+            className="border-[#8C8C8C80] border rounded-[4px] text-[14px] py-[10px] px-[12px]"
           />
         </div>
-        <div className="flex items-center self-end gap-5">
+        <div className="flex items-center self-center gap-4">
           <button
             className="w-[122px] h-[34px] rounded-[4px] bg-[#31164D] font-[500] text-[14px] cursor-pointer"
             onClick={toggleCreate}
