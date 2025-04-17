@@ -135,14 +135,14 @@ export default function AiPage() {
             } else {
                 setBarWidth(100);
                 setTimeout(() => {
-                    router.push('/create-with-ai');
+                    router.push('/choose-options');
                 }, 500); 
             }
     
             if (!isAudio && newCount === 2) {
               setBarWidth(100);
                 setTimeout(() => {
-                    router.push('/create-with-ai');
+                    router.push('/choose-options');
                 }, 500);   
             }
     
@@ -172,19 +172,19 @@ export default function AiPage() {
                 <Navbar toggleDrop={toggleDrop} isDrop={isDrop}/>
                 <div className='flex flex-col z-1 relative pb-40 gap-2'>
                     <div className='flex justify-center items-center relative pt-10'>
-                        <span onClick={() => router.back()} className='absolute text-[#8C8C8C] font-[500] text-[12px] left-10 max-sm:top-5 cursor-pointer hover:text-white'>Back</span>
+                        <span onClick={() => router.back()} className='absolute text-[#8C8C8C] font-[500] text-[14px] left-10 max-sm:top-5 cursor-pointer hover:text-white'>Back</span>
                         <div className={`flex flex-col items-center ${isSecondTextWidget && 'hidden'}`}>
                             <h1 className='text-[24px] font-[600]'>Write your script</h1>
-                            <p className='text-[#CF36E9] text-[10.95px] font-[400] flex items-center gap-2'>Don’t Know what to write?
+                            <p className='text-[#CF36E9] text-[12px] font-[400] flex items-center my-2 gap-2'>Don’t Know what to write?
                                 <button className="w-[74px] h-[24px] bg-[#CF36E9] text-[#fff] rounded-[4px]">Generate</button>
                             </p>
-                            <span onClick={()=>setGenerating(true)} className='absolute text-[#CF36E9] font-[500] text-[12px] right-10 max-sm:top-5 cursor-pointer hover:text-white'>Skip to editor</span>
+                            <span onClick={()=>setGenerating(true)} className='absolute text-[#CF36E9] font-[500] text-[14px] right-10 max-sm:top-5 cursor-pointer hover:text-white'>Skip to editor</span>
                         </div>
-                        {isSecondTextWidget &&  <span className='absolute text-[#CF36E9] font-[500] text-[12px] right-10 max-sm:top-5 cursor-pointer hover:text-white'>Skip to editor</span>}
+                        {isSecondTextWidget &&  <span onClick={()=>setGenerating(true)} className='absolute text-[#CF36E9] font-[500] text-[14px] right-10 max-sm:top-5 cursor-pointer hover:text-white'>Skip to editor</span>}
                     </div>
                     <div className={`flex gap-3 self-center max-sm:flex-col max-sm:items-center ${isSecondTextWidget && `mt-10`}`}>
-                        <Image src='/person-12.png' alt="picture of a person" width={400} height={354} className='w-[400px] max-sm:max-w-[400px] max-sm:w-full h-[354px] object-cover rounded-[8px]'/>
-                        <div className="w-[302px] max-sm:w-full h-[355px] flex flex-col rounded-[8px] p-5 bg-[#140926] gap-1">
+                        <Image src='/person-12.png' alt="picture of a person" width={400} height={354} className='w-[400px] max-sm:max-w-[400px] max-sm:w-full min-h-[354px] object-cover rounded-[8px]'/>
+                        <div className="w-[302px] max-sm:w-full min-h-[355px] flex flex-col rounded-[8px] p-5 bg-[#140926] gap-1">
                             <div className="w-[188px] h-[45px] rounded-[60px] bg-[#261148] p-1 flex items-center gap-2">
                                 <div onClick={() => setIsAudio(false)} className={`${isAudio ? 'transparent opacity-[.5]' : 'bg-[#140926] opacity-[1]'} w-[90px] h-[36px] rounded-[60px] p-[10px] gap-[10px] flex items-center transition-all duration-300 ease-in-out cursor-pointer`}>
                                     <Image src='/text-circle.png' alt="text icon" width={16} height={16} className='w-[16px] h-[16px]'/>
@@ -215,8 +215,8 @@ export default function AiPage() {
                             </div>
                         </div>
                     </div>
-                    <div className="text-[#8C8C8C] text-[10px] font-[300] flex self-center mt-5">Complete the step by</div>
-                    <button onClick={handleContinueClick} className="bg-[#9413E6] cursor-pointer rounded-[3.13px] w-[199.43] h-[31px] mt-5 flex self-center justify-center items-center text-[9.39px] font-[700]">Continue</button>
+                    <div className="text-[#8C8C8C] text-[12px] font-[300] flex self-center mt-5">Complete the step by</div>
+                    <button onClick={handleContinueClick} className="bg-[#9413E6] cursor-pointer rounded-[3.13px] w-[199.43] h-[31px] mt-5 flex self-center justify-center items-center text-[16px] font-[700]">Continue</button>
                 </div>
             </div>
             {isRecord && <Record setIsRecord={setIsRecord} handlePlay={handlePlay}/>}
