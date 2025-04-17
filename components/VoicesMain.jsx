@@ -245,10 +245,10 @@ const VoicesMain = () => {
                      <div className='text-[24px] max-sm:text-center font-[500]'>Voices</div>
                     <div className='flex items-center max-sm:flex-col gap-5'>
                    <SearchBar/>
-                     <Link href={'/avatar'} className='cursor-pointer hover:animate-pulse w-[196px] rounded-[4px] bg-[#CF36E9] font-[500] h-[44px] flex gap-2 items-center text-[20px] justify-center z-2'><FaPlus/>Create Avatar</Link>
+                     <button onClick={()=>setShowPrompt(true)} className='cursor-pointer hover:animate-pulse w-[196px] rounded-[4px] bg-[#CF36E9] font-[500] h-[44px] flex gap-2 items-center text-[20px] justify-center z-2'><FaPlus/>Create Voices</button>
                     </div>
              </div>
-             <div className='flex gap-1 items-center max-sm:self-center px-5'>My Avatar <div className='text-[13.43px] bg-[#341E58] w-[26px] h-[26px] rounded-[3.35px] flex justify-center items-center'>0</div></div>
+             <div className='flex gap-1 items-center max-sm:self-center px-5'>My Voices <div className='text-[13.43px] bg-[#341E58] w-[26px] h-[26px] rounded-[3.35px] flex justify-center items-center'>0</div></div>
             {avatarVoices?.length>0 ? 
             <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-5 p-5 pb-60">
               {avatarVoices.map((voice, i)=> 
