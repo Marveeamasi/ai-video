@@ -13,7 +13,6 @@ const VoicesMain = () => {
     const [next, setNext] = useState(false);
     const [showPrompt, setShowPrompt] = useState(false);
     const [file, setFile] = useState(null);
-    const [isUpload, setIsUpload] = useState(false);
     const [avatarVoices, setAvatarVoices] = useState([]);
     const [elevenVoices, setElevenVoices] = useState([]);
     const [voiceUtils, setVoiceUtils] = useState({});
@@ -80,9 +79,6 @@ const VoicesMain = () => {
     }
     
     const NextWidget = () => {
-      const handleUpload = () => {
-           setIsUpload(true);
-      }
 
       return (
         <div onClick={(e)=> e.stopPropagation()} className='w-[504px] max-sm:w-full rounded-[16px] flex flex-col py-5 px-8 gap-10 bg-[#140926]'>
@@ -99,7 +95,7 @@ const VoicesMain = () => {
                           
                           <label htmlFor='file' className='h-[169px] cursor-pointer rounded-[8px] w-full p-2 flex bg-[#261148] flex-col gap-3 justify-center items-center text-[12px] font-[500]'>
                           <Image src={'/cloud-upload.png'} alt='tips' width={20} height={15} className=''/>
-                          <p>{isUpload && file? `Audio file selected: ${file?.name}`:'Upload Audio File'}</p>
+                          <p>{file? `Audio file selected: ${file?.name}`:'Upload Audio File'}</p>
                             </label>
                             <input onChange={(e) => setFile(e.target.files[0])} type="file" id="file" className='hidden'/>
                             <div className='flex gap-1'>
@@ -109,12 +105,12 @@ const VoicesMain = () => {
                                I agree to abide by VideoDual Terms of Service and Privacy Policy
                               </label>
                             </div>
-                           {isUpload && file? 
+                           {file? 
                            <button onClick={handleCreateAvatar} className='w-full h-[44px] bg-[#CF36E9] rounded-[4px] text-sm cursor-pointer'>Save Your Voice</button>
                            :
                            <div className='text-[#8C8C8C] font-[500] text-sm grid grid-cols-2 gap-3'>
                             <button onClick={()=>setNext(false)} className='rounded-[4px] bg-transparent border border-[#261148] h-[44px] cursor-pointer'>Cancel</button>
-                            <div onClick={handleUpload} className='cursor-pointer hover:animate-pulse text-white rounded-[4px] bg-[#CF36E9] font-[500] h-[44px] flex gap-2 items-center justify-center'><Image alt='add' src='/add-icon.png' width={20} height={20} className='w-[20px] h-[20]'/>Create Voices</div>
+                            <div className='cursor-pointer hover:animate-pulse text-white rounded-[4px] bg-[#CF36E9] font-[500] h-[44px] flex gap-2 items-center justify-center'><Image alt='add' src='/add-icon.png' width={20} height={20} className='w-[20px] h-[20]'/>Create Voices</div>
                           </div>}
                            </div>
                     </div>
