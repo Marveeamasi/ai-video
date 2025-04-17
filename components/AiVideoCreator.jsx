@@ -54,7 +54,7 @@ const AiVideoCreator = () => {
           href="#"
           className="py-[10px] px-[20px] rounded-[8px] border max-sm:gap-2 max-sm:flex-col bg-[#BB5ACC5E] border-[#CF36E9] flex justify-between items-center mt-10"
         >
-          <div className="text-[23.37px] font-[500] max-sm:text-center max-sm:text-sm">
+          <div className="text-[16px] font-[500] max-sm:text-center max-sm:text-sm">
             Get more and take your content to the next level
           </div>
           <div className="flex items-center gap-2">
