@@ -4,6 +4,7 @@ import SearchBar from './SearchBar'
 import Image from 'next/image'
 import PublicAvatar from './PublicAvatar'
 import CreateNewAvatarPrompt from './CreateNewAvatarPrompt'
+import { FaPlus } from "react-icons/fa";
 
 const avatarData = [
   { image: '/person5.png', title: 'Jessie Ronie', subImage: '/person5.png', style: '1' },
@@ -34,8 +35,8 @@ const AvatarMain = () => {
         <div className='text-[24px] max-sm:text-center font-[500]'>Avatar</div>
         <div className='flex items-center max-sm:flex-col gap-5'>
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-          <div onClick={toggleCreate} className='cursor-pointer hover:animate-pulse w-[196px] rounded-[4px] bg-[#CF36E9] font-[500] h-[44px] flex gap-2 items-center text-[20px] justify-center z-2'>
-            <Image alt='add' src='/add-icon.png' width={24} height={24} className='w-[24px] h-[24]' />Create Avatar
+          <div onClick={toggleCreate} className='cursor-pointer hover:animate-pulse w-[196px] rounded-[4px] bg-[#CF36E9] font-[500] h-[44px] flex gap-2 items-center text-[16px] justify-center z-2'>
+            <FaPlus />Create Avatar
           </div>
         </div>
       </div>
@@ -52,8 +53,8 @@ const AvatarMain = () => {
         </div>
         <div className="flex flex-col gap-5 max-sm:items-center">
           <div className="max-w-[309px] max-sm:text-center text-[#D9D9D9]">Create your own avatar, adapted to your needs, with your own face.</div>
-          <div onClick={toggleCreate} className='cursor-pointer z-2 hover:animate-pulse w-[196px] rounded-[4px] bg-[#CF36E9] font-[500] h-[44px] flex gap-2 items-center text-[20px] justify-center'>
-            <Image alt='add' src='/add-icon.png' width={24} height={24} className='w-[24px] h-[24]' />Create Avatar
+          <div onClick={toggleCreate} className='cursor-pointer z-2 hover:animate-pulse w-[196px] rounded-[4px] bg-[#CF36E9] font-[500] h-[44px] flex gap-2 items-center text-[16px] justify-center'>
+            <FaPlus />Create Avatar
           </div>
         </div>
       </div>
