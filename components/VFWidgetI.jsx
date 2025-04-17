@@ -47,7 +47,7 @@ const VFWidgetI = () => {
   return (
     <>
      <div className='flex gap-3 justify-center max-sm:flex-col max-sm:items-center'>
-                <div className='max-sm:w-full max-sm:flex max-sm:justify-center transition-all duration-300 ease-in-out'><Image src='/person.png' alt="picture of a person" width={610} height={354} className={`transition-all duration-300 ease-in-out ${isLandScape? 'w-[610px] h-[354px] max-sm:w-full max-sm:h-[180px]':'w-[400px] max-sm:w-[180px] max-sm:h-[354px] h-[741px] object-cover'} object-top rounded-[8px]`}/></div>
+                <div className={`max-sm:w-full max-sm:flex max-sm:justify-center transition-all duration-300 ease-in-out rounded-[8px] bg-[black]  ${isLandScape? 'w-[610px] h-[354px] max-sm:w-full max-sm:h-[180px]':'w-[400px] max-sm:w-[180px] max-sm:h-[354px] h-[741px]'}`}><Image src='/person-12.png' alt="picture of a person" width={610} height={354} className={`transition-all duration-300 ease-in-out object-contain ${isLandScape? 'w-[610px] h-[354px] max-sm:w-full max-sm:h-[180px]':'w-[400px] max-sm:w-[180px] max-sm:h-[354px] h-[741px]'} object-center`}/></div>
                 <div className={``}>
                <div className={`w-[302px] flex flex-col relative gap-1`}>
                 {blurbg && <div className='absolute w-full h-full bg-[#0000001A] backdrop-blur-[3px] z-3 rounded-[4px]'></div>}
