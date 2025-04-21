@@ -7,6 +7,8 @@ import PreviewSideBarSelect from './PreviewSideBarSelect'
 const PreviewSideBar = ({showSlide}) => {
   const [blurbg, setBlurbg] = useState(false);
   const [selectName, setSelectName] = useState('');
+  const [allowZoom, setAllowZoom] = useState(false);
+  const [allowCaption, setAllowCaption] = useState(false);
 
 const handleSelectClick = (name) => {
   setBlurbg(!blurbg);
@@ -22,12 +24,12 @@ const handleSelectClick = (name) => {
       <PreviewSideBarSelect setBlurbg={setBlurbg} selectName={selectName} setSelectName={setSelectName} handleSelectClick={handleSelectClick} pos={'top-[110%]'} type={''} name={'Camera'} options={['Face','Side Profile']} image={'/face-id.png'}/>
       <div className={`flex relative ${selectName==='Body Language'? 'z-50':'z-10'} items-center justify-between text-[12.51px] font-[700]`}>
         Zoom
-        <ToggleSwitch/>
+        <ToggleSwitch isOn={allowZoom} setIsOn={setAllowZoom}/>
       </div>
       <PreviewSideBarSelect setBlurbg={setBlurbg} selectName={selectName} setSelectName={setSelectName} handleSelectClick={handleSelectClick} pos={'top-[110%]'} type={''} name={'Body Language'} options={['Gesture 1','Gesture 2']} image={'/video-camera-ai.png'}/>
       <div className={`flex relative  ${selectName==='Ai Caption'? 'z-50':'z-10'} items-center justify-between text-[12.51px] font-[700]`}>
         Caption
-        <ToggleSwitch/>
+        <ToggleSwitch isOn={allowCaption} setIsOn={setAllowCaption}/>
       </div>
       <PreviewSideBarSelect setBlurbg={setBlurbg} selectName={selectName} setSelectName={setSelectName} handleSelectClick={handleSelectClick} pos={'top-[110%]'} type={'caption'} name={'Ai Caption'} options={['DYNAMIC', 'PROFESSIONAL', 'DOCUMENTARY']} image={'/closed-caption.png'}/>
       <PreviewSideBarSelect setBlurbg={setBlurbg} selectName={selectName} setSelectName={setSelectName} handleSelectClick={handleSelectClick} pos={'bottom-[110%]'} type={'background'} name={'Background'} options={['None','Upload', 'Mist','Mist','Mist','Mist']} image={''}/>
