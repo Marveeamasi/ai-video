@@ -18,6 +18,7 @@ const PreviewSideBar = ({ showSlide }) => {
     Music: 'Cyberpunk Electro',
     Voice: 'John Doe',
   });
+
   const handleSelectClick = (name) => {
     setBlurbg(!blurbg);
     setSelectName(name);
@@ -25,8 +26,6 @@ const PreviewSideBar = ({ showSlide }) => {
 
   const handleSetSelectedOption = (name, option) => {
     setSelectedOptions((prev) => ({ ...prev, [name]: option }));
-    setBlurbg(false);
-    setSelectName('');
   };
 
   return (
