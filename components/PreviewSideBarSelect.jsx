@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import AvatarDrop from './AvatarDrop';
 import CameraDrop from './CameraDrop';
 import CaptionDrop from './CaptionDrop';
@@ -10,9 +10,12 @@ import VoiceDrop from './VoiceDrop';
 
 const PreviewSideBarSelect = ({ image, options, name, type, pos, selectName, handleSelectClick, setBlurbg, setSelectName, selectedOption, setSelectedOption }) => {
   const selectRef = useRef(null);
+  const dropdownRef = useRef(null);
 
   const handleSelectOption = (option) => {
     setSelectedOption(name, option);
+    setSelectName('');
+    setBlurbg(false);
   };
 
   const kill = () => {
@@ -22,10 +25,16 @@ const PreviewSideBarSelect = ({ image, options, name, type, pos, selectName, han
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (selectRef.current && !selectRef.current.contains(event.target)) {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target) &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
         kill();
       }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -50,25 +59,25 @@ const PreviewSideBarSelect = ({ image, options, name, type, pos, selectName, han
         {selectedOption}
       </div>
       {selectName === 'Avatar' && name === 'Avatar' && (
-        <AvatarDrop kill={kill} options={options} pos={pos} handleSelectOption={handleSelectOption} />
+        <AvatarDrop dropdownRef={dropdownRef} kill={kill} options={options} pos={pos} handleSelectOption={handleSelectOption} />
       )}
-         {selectName === 'Camera' && name === 'Camera' && (
-        <CameraDrop kill={kill} options={options} pos={pos} handleSelectOption={handleSelectOption} />
+      {selectName === 'Camera' && name === 'Camera' && (
+        <CameraDrop dropdownRef={dropdownRef} kill={kill} options={options} pos={pos} handleSelectOption={handleSelectOption} />
       )}
       {selectName === 'Body Language' && name === 'Body Language' && (
-        <CameraDrop kill={kill} options={options} pos={pos} handleSelectOption={handleSelectOption} />
+        <CameraDrop dropdownRef={dropdownRef} kill={kill} options={options} pos={pos} handleSelectOption={handleSelectOption} />
       )}
       {selectName === 'Ai Caption' && name === 'Ai Caption' && (
-        <CaptionDrop kill={kill} options={options} pos={pos} handleSelectOption={handleSelectOption} />
+        <CaptionDrop dropdownRef={dropdownRef} kill={kill} options={options} pos={pos} handleSelectOption={handleSelectOption} />
       )}
       {selectName === 'Background' && name === 'Background' && (
-        <BackgroundDrop kill={kill} options={options} pos={pos} handleSelectOption={handleSelectOption} />
+        <BackgroundDrop dropdownRef={dropdownRef} kill={kill} options={options} pos={pos} handleSelectOption={handleSelectOption} />
       )}
       {selectName === 'Music' && name === 'Music' && (
-        <MusicDrop kill={kill} options={options} pos={pos} handleSelectOption={handleSelectOption} />
+        <MusicDrop dropdownRef={dropdownRef} kill={kill} options={options} pos={pos} handleSelectOption={handleSelectOption} />
       )}
       {selectName === 'Voice' && name === 'Voice' && (
-        <VoiceDrop kill={kill} options={options} pos={pos} handleSelectOption={handleSelectOption} />
+        <VoiceDrop dropdownRef={dropdownRef} kill={kill} options={options} pos={pos} handleSelectOption={handleSelectOption} />
       )}
     </div>
   );
