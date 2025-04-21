@@ -200,11 +200,6 @@ const PreviewMain = () => {
     };
   }, [isDragging]);
 
-  const handleNextStep = () => {
-    setGenerating(false);
-    router.push('/avatar');
-  };
-
   const handleRetry = () => {
     setError(false);
     setGenerating(true);
@@ -222,11 +217,16 @@ const PreviewMain = () => {
   const handlePaymentConfirmed = () => {
     setShowPaymentAlert(false);
     setGenerating(true);
+    setTimeout(() => {
+      setGenerating(false);
+    router.push('/avatar');
+    }, 3000);
   };
 
   return (
     <div className='flex flex-col p-5 pt-4 pb-40 gap-3 items-center'>
       <textarea
+
         placeholder="What's today's weather and how is it going"
         className='text-[12px] font-[400] w-full p-5 z-5 resize-none max-sm:h-[150px] outline-none placeholder:text-[#D9D9D9] rounded-[8px] h-[193px] bg-[#140926]'
       />
@@ -316,7 +316,7 @@ const PreviewMain = () => {
           />
         </div>
 
-        <div className='flex items-center justify-end gap-[10px] text-[#8C8C8C] text-[12px]'>
+        <div className='flex items-center justify-end gap-[10px] text-[#8C8C8C] w-[150px] text-[12px]'>
           {formatTime(currentTime)}/{formatTime(duration)}
         </div>
       </div>
@@ -338,7 +338,7 @@ const PreviewMain = () => {
                 .fill()
                 .map((_, index) => (
                   <div key={index} className='w-full h-full bg-gray-500'>
-                    <Image src='/person-12.png' height={48.86} width={55.05} className='w-full h-full object-cover' alt='frame' />
+                    
                   </div>
                 ))
             )}

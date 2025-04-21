@@ -246,7 +246,7 @@ export default function AiPage() {
             <div className={`flex flex-col items-center ${isSecondTextWidget && 'hidden'}`}>
               <h1 className='text-[24px] font-[600]'>Write your script</h1>
               <p className='text-[#CF36E9] text-[12px] font-[400] flex items-center my-2 gap-2'>Don’t Know what to write?
-                <button className="w-[74px] h-[24px] bg-[#CF36E9] text-[#fff] rounded-[4px]">Generate</button>
+                <button className="w-[74px] h-[24px] bg-[#CF36E9] text-[#fff] rounded-[4px] cursor-pointer">Generate</button>
               </p>
               <span onClick={handleSkip} className='absolute text-[#CF36E9] font-[500] text-[14px] right-10 max-sm:top-5 cursor-pointer hover:text-white'>Skip to editor</span>
             </div>
