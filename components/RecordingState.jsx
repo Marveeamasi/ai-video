@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useEffect } from 'react';
 
 const RecordingState = ({ setIsRecordingState, formatTime, handlePause, time, mediaStreamRef }) => {
-  // Cleanup media stream when component unmounts
+ 
   useEffect(() => {
     return () => {
       if (mediaStreamRef?.current) {
@@ -12,9 +12,9 @@ const RecordingState = ({ setIsRecordingState, formatTime, handlePause, time, me
     };
   }, [mediaStreamRef]);
 
-  // Handle backdrop click to pause recording cleanly
+ 
   const handleClose = () => {
-    handlePause(); // Triggers pause logic to stop recording and clean up
+    handlePause(); 
     setIsRecordingState(false);
   };
 

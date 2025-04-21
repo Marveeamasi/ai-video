@@ -60,6 +60,7 @@ export default function AiPage() {
       setIsPausedState(false);
       setIsSecondTextWidget(true);
       setBarWidth(75);
+      console.log(audioFromRecord)
     }
   };
 
@@ -76,31 +77,32 @@ export default function AiPage() {
     setIsRecordingState(true);
     setIsPausedState(false);
     setIsInitialRecordState(false);
-    setTime(0); // Reset timer for new recording
-    setRecordedChunks([]); // Clear previous chunks
-    setAudioFromRecord(null); // Clear previous audio
-
+    setTime(0);
+    setAudioFromRecord(null);
+  
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       mediaStreamRef.current = stream;
-
+  
       const recorder = new MediaRecorder(stream);
-      setMediaRecorder(recorder);
-
+      let chunks = [];
+  
       recorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
-          setRecordedChunks((prev) => [...prev, event.data]);
+          chunks.push(event.data);
         }
       };
-
+  
       recorder.onstop = () => {
-        if (recordedChunks.length > 0) {
-          const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+        if (chunks.length > 0) {
+          const blob = new Blob(chunks, { type: 'audio/webm' });
           const audioUrl = URL.createObjectURL(blob);
           setAudioFromRecord(audioUrl);
+          console.log('from recording:', audioUrl);
         }
       };
-
+  
+      setMediaRecorder(recorder);
       recorder.start();
     } catch (err) {
       console.error("Microphone access denied or error starting recording:", err);
@@ -108,6 +110,7 @@ export default function AiPage() {
       setIsRecordingState(false);
     }
   };
+  
 
   const handlePause = () => {
     if (mediaRecorder && mediaRecorder.state === 'recording') {
@@ -115,6 +118,7 @@ export default function AiPage() {
       mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
       mediaStreamRef.current = null;
       setMediaRecorder(null);
+      console.log('from pause:',audioFromRecord)
     }
     setIsPausedState(true);
     setIsRecordingState(false);
@@ -125,39 +129,40 @@ export default function AiPage() {
     setIsRecordingState(true);
     setIsPausedState(false);
     setIsInitialRecordState(false);
-    setTime(0); // Reset timer for re-record as per requirement
-    setRecordedChunks([]); // Clear previous chunks
-    setAudioFromRecord(null); // Clear previous audio
-
+    setTime(0);
+    setAudioFromRecord(null);
+  
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       mediaStreamRef.current = stream;
-
+  
       const recorder = new MediaRecorder(stream);
-      setMediaRecorder(recorder);
-
+      let chunks = [];
+  
       recorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
-          setRecordedChunks((prev) => [...prev, event.data]);
+          chunks.push(event.data);
         }
       };
-
+  
       recorder.onstop = () => {
-        if (recordedChunks.length > 0) {
-          const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+        if (chunks.length > 0) {
+          const blob = new Blob(chunks, { type: 'audio/webm' });
           const audioUrl = URL.createObjectURL(blob);
           setAudioFromRecord(audioUrl);
+          console.log('from recording:', audioUrl);
         }
       };
-
+  
+      setMediaRecorder(recorder);
       recorder.start();
     } catch (err) {
-      console.error("Microphone access denied or error starting re-recording:", err);
-      setError("Failed to access microphone for re-recording. Please allow microphone access and try again.");
+      console.error("Microphone access denied or error starting recording:", err);
+      setError("Failed to access microphone. Please allow microphone access and try again.");
       setIsRecordingState(false);
     }
   };
-
+  
   const handleShowRecordState = () => {
     setIsInitialRecordState(true);
     setIsRecordingState(false);
@@ -181,13 +186,12 @@ export default function AiPage() {
   };
 
   useEffect(() => {
-    // Reset progress and widget states when isAudio changes
     setBarWidth(40);
     setIsFirstTextWidget(true);
     setIsSecondTextWidget(false);
-    setTime(0); // Reset timer when switching modes
-    setAudioFromRecord(null); // Clear audio
-    setRecordedChunks([]); // Clear chunks
+    setTime(0);
+    setAudioFromRecord(null);
+    setRecordedChunks([]); 
     if (mediaStreamRef.current) {
       mediaStreamRef.current.getTracks().forEach((track) => track.stop());
       mediaStreamRef.current = null;
@@ -207,12 +211,12 @@ export default function AiPage() {
   const handleContinueClick = () => {
     if (!isAudio) {
       if (isFirstTextWidget) {
-        // From TextScriptFirst to TextScriptSecond
+        
         setIsFirstTextWidget(false);
         setIsSecondTextWidget(true);
         setBarWidth(75);
       } else if (isSecondTextWidget) {
-        // From TextScriptSecond to navigation
+        
         setBarWidth(100);
         setTimeout(() => {
           router.push('/choose-options');
@@ -220,7 +224,7 @@ export default function AiPage() {
       }
     } else {
       if (isSecondTextWidget) {
-        // From TextScriptSecond to navigation (after audio recording)
+        
         setBarWidth(100);
         setTimeout(() => {
           router.push('/choose-options');

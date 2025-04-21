@@ -17,7 +17,7 @@ const RecordPausedState = ({ handleContinue, formatTime, handleRerecord, time, a
     }
   };
 
-  // Cleanup audio URL and media stream when component unmounts or audioFromRecord changes
+
   useEffect(() => {
     return () => {
       if (audioFromRecord) {
@@ -30,7 +30,7 @@ const RecordPausedState = ({ handleContinue, formatTime, handleRerecord, time, a
     };
   }, [audioFromRecord, mediaStreamRef]);
 
-  // Handle backdrop click to close modal
+
   const handleClose = () => {
     if (audioRef.current) {
       audioRef.current.pause();
@@ -40,8 +40,7 @@ const RecordPausedState = ({ handleContinue, formatTime, handleRerecord, time, a
       mediaStreamRef.current.getTracks().forEach((track) => track.stop());
       mediaStreamRef.current = null;
     }
-    // Optionally, you could call handleContinue() here to proceed, but for now, we'll just close
-    // If you want to keep the paused state, you might need to adjust AiPage.jsx state
+  
   };
 
   return (

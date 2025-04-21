@@ -1,8 +1,14 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ToggleSwitch from './ToggleSwitch'
 
 const TextScriptSecond = ({script, handleTextScript}) => {
+  const [allowVoiceTransform, setAllowVoiceTransform] = useState(false);
+  
+useEffect(()=>{
+  localStorage.setItem('VOICE_TRANSFORM', JSON.stringify(allowVoiceTransform));
+},[allowVoiceTransform]);
+
   return (
     <div className="flex flex-col w-full gap-[6px]">
                        <div className="flex items-center gap-3">
@@ -18,7 +24,7 @@ const TextScriptSecond = ({script, handleTextScript}) => {
                        </div>
                        <div className='text-[#8C8C8C] text-[10px]'>Choose a voice to embody your speech</div>
                         </div>
-                        <ToggleSwitch/>
+                        <ToggleSwitch isOn={allowVoiceTransform} setIsOn={setAllowVoiceTransform}/>
                        </div>
                        </div>
   )

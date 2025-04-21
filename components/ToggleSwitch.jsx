@@ -1,8 +1,7 @@
 'use client'
 import { useState } from "react"; 
 
-export default function ToggleSwitch() {
-  const [isOn, setIsOn] = useState(true);
+export default function ToggleSwitch({isOn, setIsOn}) {
 
   const toggleSwitch = () => setIsOn(!isOn);
 

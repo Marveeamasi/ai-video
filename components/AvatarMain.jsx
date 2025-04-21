@@ -46,7 +46,6 @@ const AvatarMain = () => {
       }
     }
 
-    setNewUser(localStorage.getItem('NEW_USER') || 'true');
     setIsSuccessAvatarAdded(localStorage.getItem('IS_SUCCESS') || 'false');
   }, []);
 

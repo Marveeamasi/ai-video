@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useEffect } from 'react';
 
 const InitialRecordState = ({ setIsInitialRecordState, handleRecording, mediaStreamRef }) => {
-  // Cleanup media stream when component unmounts or modal closes
+
   useEffect(() => {
     return () => {
       if (mediaStreamRef?.current) {
@@ -13,7 +13,7 @@ const InitialRecordState = ({ setIsInitialRecordState, handleRecording, mediaStr
   }, [mediaStreamRef]);
 
   const handleClose = () => {
-    // Stop any existing media stream when closing the modal
+
     if (mediaStreamRef?.current) {
       mediaStreamRef.current.getTracks().forEach((track) => track.stop());
       mediaStreamRef.current = null;
