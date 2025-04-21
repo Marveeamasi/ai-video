@@ -8,7 +8,7 @@ export default function CreateNewAvatarPrompt({ toggleCreate, filteredAvatars })
   const handleCreateAvatar = () => {
     if (!filteredAvatars.some(avatar => avatar.title.toLowerCase() === name.toLowerCase())) {
       localStorage.setItem('AVATAR_NAME_FROM_VD', name);
-      router.push('/how-it-works');
+      router.push('/upload-footage');
     } else {
       alert('Avatar with this name already exists!');
     }

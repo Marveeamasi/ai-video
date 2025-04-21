@@ -3,10 +3,20 @@ import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import UtilsCard from "./UtilsCard";
 import Link from "next/link";
+import DeletePromt from "./Prompt";
 
-export default function AiVideoCreatorCard({ isGenerated, heading, image, time }) {
+export default function AiVideoCreatorCard({ isGenerated, heading, image, time, id }) {
+    const [isDelete, setIsDelete] = useState(false);
   const [showUtils, setShowUtils] = useState(false);
   const cardRef = useRef(null);
+
+  const handleDelete = () => {
+     console.log('deletes item with id: ', id);
+  }
+
+  const handleUndo = () => {
+    setIsDelete(false);
+  }
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -23,6 +33,8 @@ export default function AiVideoCreatorCard({ isGenerated, heading, image, time }
       {showUtils && (
         <UtilsCard
           setShowEdit={() => console.log("Trigger edit modal or action here")}
+          setShowDelete={() => setIsDelete(true)}
+          handleDownload={() => console.log('Will download videos')}
         />
       )}
 
@@ -50,6 +62,7 @@ export default function AiVideoCreatorCard({ isGenerated, heading, image, time }
         {isGenerated && <div className="text-sm text-[#CF36E9]">GENERATED</div>}
         <div className="text-xs font-[500] text-[#8C8C8C]">{time}</div>
       </div>
+        {isDelete && <DeletePromt handleDelete={handleDelete} handleUndo={handleUndo} message={'Are you sure you want to delete style?'}/>}
     </div>
   );
 }

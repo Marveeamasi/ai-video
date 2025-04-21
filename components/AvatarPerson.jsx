@@ -3,11 +3,27 @@ import React, { useState } from 'react'
 import Navbar from './Navbar'
 import Image from 'next/image'
 import UtilsCardMini from './UtilsCardMini'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import Prompt from './Prompt'
 
 const AvatarPerson = ({image, title, style}) => {
     const [isDrop, setIsDrop] = useState(false);
     const [isShowUtils, setIsShowUtils] = useState(false);
+    const [isCreate, setIsCreate] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const router = useRouter();
+
+    const handleDelete = () => {
+     setIsDeleting(true);
+    };
+
+    const handleEdit = () => {
+      console.log('editing');
+    }
+
+const handleCreate = () => {
+  router.push('/write-your-script');
+}
       
         const toggleDrop = () => {
           setIsDrop(!isDrop);
@@ -39,12 +55,20 @@ const AvatarPerson = ({image, title, style}) => {
                  <div className="text-[18.04px] text-[#D9D9D9]">2 Camera</div>
                  </div>
                  <Image onClick={toggleShowUtils} src={'/circle-vertical-dots.png'} width={24} height={24} alt='person pics' className='w-[24px] h-[24px] cursor-pointer'/>
-                 {isShowUtils && <UtilsCardMini/>}
+                 {isShowUtils && <UtilsCardMini handleDelete={handleDelete} handleEdit={handleEdit}/>}
                  </div>
               </div>
               </div>
-              <Link href={'/write-your-script'} className='max-w-[406px] cursor-pointer w-full h-[67px] rounded-[8px] border-[1.5px] border-[#8C8C8C] hover:opacity-75 z-10 flex justify-center items-center' >Create Video</Link>
+              <div onClick={()=> setIsCreate(true)} className='max-w-[406px] cursor-pointer w-full h-[67px] rounded-[8px] border-[1.5px] border-[#8C8C8C] hover:opacity-75 z-10 flex justify-center items-center' >Create Video</div>
       </div>
+      {isDeleting && <Prompt  message={`Are you sure to delete style?`}
+          handleUndo={() => setIsDeleting(false)}
+          handleAction={handleDelete}/>}
+      {isCreate && <Prompt  message={`Are you sure to create a style?`}
+          handleUndo={() => setIsCreate(false)}
+          handleAction={handleCreate}
+          action={'Create'}/>
+      }
           </div>
   )
 }

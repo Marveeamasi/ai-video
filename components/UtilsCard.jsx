@@ -1,12 +1,15 @@
 'use client';
 import Image from "next/image";
 
-export default function UtilsCard({ bg = "bg-[#9413e6]", pos = "bottom-[-160px]", setShowEdit }) {
+export default function UtilsCard({ bg = "bg-[#9413e6]", pos = "bottom-[-160px]", setShowEdit, setShowDelete, handleDownload }) {
   const actions = [
     {
       label: "Delete",
       icon: "/delete.png",
-      onClick: () => console.log("Handle delete logic here"),
+      onClick: () => {
+        if (setShowDelete) setShowDelete();
+        else console.log("Handle delete logic here");
+      },
     },
     {
       label: "Edit",
@@ -19,12 +22,16 @@ export default function UtilsCard({ bg = "bg-[#9413e6]", pos = "bottom-[-160px]"
     {
       label: "Download",
       icon: "/cloud-download.png",
-      onClick: () => console.log("Handle download logic here"),
+      onClick: () => {
+        if (handleDownload) handleDownload();
+        else console.warn("No handle download function provided!");
+      },
     },
   ];
 
   return (
     <div
+    onClick={(e)=> e.stopPropagation()}
       className={`absolute z-[11111] ${pos} w-[282px] h-[150px] rounded-[8px] bg-[#140926] p-3 flex flex-col justify-center items-center gap-1 transition-all duration-300 ease-in-out`}
     >
       {actions.map((action, index) => (

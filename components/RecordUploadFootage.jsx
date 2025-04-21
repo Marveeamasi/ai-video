@@ -2,22 +2,93 @@
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import Generating from './Generating';
+import Trouble from './Trouble';
 
 const RecordUploadFootage = () => {
     const [avatarName, setAvatarName] = useState('');
     const [file, setFile] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+
     const router = useRouter();
 
-    const handleClick = () => {
-        if (file) {
-            localStorage.setItem('AVATAR_NAME_fROM_VD', avatarName);
-            localStorage.setItem('FOOTAGE_FROM_VD', file.name);
-            router.push('/write-your-script');
+    const fileToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+        });
+    };
+
+    const getAvatars = () => {
+        const avatars = localStorage.getItem('AVATARS');
+        return avatars ? JSON.parse(avatars) : [];
+    };
+
+    const saveAvatar = async (name, videoFile) => {
+        try {
+            const base64Video = await fileToBase64(videoFile);
+            const newAvatar = {
+                id: Date.now().toString(),
+                name: name,
+                video: base64Video,
+                style: '0',
+                createdAt: new Date().toISOString()
+            };
+
+            const avatars = getAvatars();
+            avatars.push(newAvatar);
+            
+            try {
+                localStorage.setItem('AVATARS', JSON.stringify(avatars));
+            } catch (e) {
+                if (e.name === 'QuotaExceededError') {
+                    avatars.shift();
+                    avatars.push(newAvatar);
+                    localStorage.setItem('AVATARS', JSON.stringify(avatars));
+                }
+            }
+            return true;
+        } catch (error) {
+            console.error('Error saving avatar:', error);
+            return false;
         }
-    }
+    };
+
+    const handleRetry = () => {
+        setIsError(false);
+       handleClick();
+    };
+
+    const handleCancel = () => {
+        setIsError(false);
+        setIsLoading(false);
+    };
+
+    const handleClick = async () => {
+        if (file && avatarName) {
+            setIsLoading(true);
+            const success = await saveAvatar(avatarName, file);
+            if (success) {
+                localStorage.setItem('IS_SUCCESS', 'true');
+                setTimeout(() => {
+                    router.push('/avatar');
+                }, 3000);
+            } else {
+                setIsLoading(false);
+                setIsError(true);
+            }
+        }
+    };
 
     useEffect(() => {
-        setAvatarName(localStorage.getItem('AVATAR_NAME_FROM_VD'));
+        const storedName = localStorage.getItem('AVATAR_NAME_FROM_VD');
+        if (storedName) {
+            setAvatarName(storedName);
+            localStorage.removeItem('AVATAR_NAME_FROM_VD');
+        }
     }, []);
 
     const validateVideo = (file) => {
@@ -26,6 +97,7 @@ const RecordUploadFootage = () => {
         video.src = URL.createObjectURL(file);
 
         video.onloadedmetadata = () => {
+            URL.revokeObjectURL(video.src);
             if (video.duration > 120) {
                 alert('Video duration should not exceed 2 minutes.');
                 setFile(null);
@@ -100,12 +172,14 @@ const RecordUploadFootage = () => {
                 </button>
                 <button
                     onClick={handleClick}
-                    className={`rounded-[4px] bg-[#9413E6] w-[129px] h-[35px] cursor-pointer ${!file ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    disabled={!file}
+                    className={`rounded-[4px] bg-[#9413E6] w-[129px] h-[35px] cursor-pointer ${!file || !avatarName ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    disabled={!file || !avatarName}
                 >
                     Create
                 </button>
             </div>
+           <Generating z={'z-[11] lg:left-[10%]'} loading={isLoading} duration={3000}/>
+            {isError && <Trouble z={'z-[11] lg:left-[10%]'} handleCancel={handleCancel} handleRetry={handleRetry}/>}
         </div>
     );
 };

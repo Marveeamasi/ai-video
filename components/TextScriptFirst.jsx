@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 
-const TextScriptFirst = ({setIsLong, isLong, scriptText, setScriptText}) => {
+const TextScriptFirst = ({setIsLong, isLong, scriptText, handleTextScript}) => {
   return (
     <div className="flex flex-col w-full gap-[6px]">
                     <div className="flex items-center gap-3">
@@ -9,7 +9,7 @@ const TextScriptFirst = ({setIsLong, isLong, scriptText, setScriptText}) => {
                     Enter Text
                     </div>
                     <textarea value={scriptText}
-                    onChange={(e) => setScriptText(e.target.value)} className="min-h-[95px] w-full rounded-[4px] p-[5px] bg-[#261148] outline-none font-[400] text-[14px] placeholder:text-[#dbdbdb] placeholder:font-[400] resize-none" placeholder="Write a short to medium length sentence, Separated by lines breaks for new ideas  (They will become new Shots)"/>
+                    onChange={handleTextScript} className="min-h-[95px] w-full rounded-[4px] p-[5px] bg-[#261148] outline-none font-[400] text-[12px] placeholder:text-[#dbdbdb] placeholder:font-[400] resize-none" placeholder="Write a short to medium length sentence, Separated by lines breaks for new ideas  (They will become new Shots)"/>
                     <div className="flex items-center gap-3">
                     <Image src='/scissors.png' alt="text icon" width={24} height={24} className='w-[24px] h-[24px] text-[12.51px] font-[700]'/>
                     Script Splitting

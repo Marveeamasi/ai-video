@@ -18,6 +18,7 @@ const VFWidgetI = () => {
     const router = useRouter();
     const [generating, setGenerating] = useState(false);
     const [error, setError] = useState(false);
+    
 
     const handleNextStep = () => {
         console.log('Loading complete! Moving to next step...');

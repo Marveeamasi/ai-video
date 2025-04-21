@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Navbar from './Navbar';
 import Image from 'next/image';
 import AiVideoCreatorCards from './AiVideoCreatorCards';
@@ -18,6 +18,10 @@ const AiVideoCreator = () => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const toggleDrop = () => setIsDrop(prev => !prev);
+
+  useEffect(()=>{
+    localStorage.setItem('FOOTAGE_FROM_VD', '');
+  },[])
 
   const filteredVideos = useMemo(() => {
     if (!searchTerm.trim()) return MOCK_VIDEOS;
@@ -78,6 +82,7 @@ const AiVideoCreator = () => {
               image={video.image}
               time={video.time}
               isGenerated={video.isGenerated}
+              id={video.id}
             />
           ))}
         </div>

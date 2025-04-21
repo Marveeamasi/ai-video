@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 
-const AudioScriptFirst = ({ handleRecord, onFileUpload }) => {
+const AudioScriptFirst = ({ handleShowRecordState, onFileUpload }) => {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -28,7 +28,7 @@ const AudioScriptFirst = ({ handleRecord, onFileUpload }) => {
         "Use the power of your voice to authentically express yourself and share your unique story with the world."
       </p>
       <div
-        onClick={handleRecord}
+        onClick={handleShowRecordState}
         className="bg-[#261148] flex flex-col justify-center items-center gap-[10px] p-[5px] rounded-[8px] w-full h-[87px] cursor-pointer hover:animate-pulse"
       >
         <Image

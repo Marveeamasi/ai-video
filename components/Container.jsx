@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import Alert from './Alert';
@@ -66,6 +66,10 @@ const Container = () => {
     const handleDotClick = (index) => {
         setCurrentStep(index);
     };
+
+    useEffect(()=> {
+        localStorage.setItem('NEW_USER', 'false');
+    },[])
 
     return (
         <div className='flex flex-col z-1 relative pb-40'>
